@@ -17,6 +17,7 @@ import java.util.*;
 
 public class DownloadHistory {
     HashMap<String, String> fileMap = new HashMap<String, String>();
+    HashMap<String, String> periodMap = new HashMap<>();
     String[] windows = new String[]{"d","w","m"};
     String[] exchanges = new String[]{ "nyse","amex","nasdaq"};
 
@@ -26,13 +27,21 @@ public class DownloadHistory {
         fileMap.put("m","c:/prices/monthly/");
     }
 
-    DownloadHistory(){
-        System.out.println("init");
+    DownloadHistory(int dPeriod, int wPeriod, int mPeriod) {
+        java.util.Date date= new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int y = cal.get(Calendar.YEAR);
+        int m = cal.get(Calendar.MONTH);
+        int d = cal.get(Calendar.DAY_OF_MONTH);
+        periodMap.put("d", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-dPeriod, m, d, y));
+        periodMap.put("w", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-wPeriod, m, d, y));
+        periodMap.put("m", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-mPeriod, m, d, y));
     }
 
     public static void main(String[] args) {
         // write your code here
-        DownloadHistory dl = new DownloadHistory();
+        DownloadHistory dl = new DownloadHistory(10, 10, 15);
         try {
             dl.DownloadSymbols();
             dl.DownloadPrices();
@@ -80,25 +89,13 @@ public class DownloadHistory {
 
     void DownloadPrices() throws IOException
     {
-        //get a list of symbols from the files
-        //Date today = Calendar.getInstance();
-        java.util.Date date= new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int y = cal.get(Calendar.YEAR);
-        int m = cal.get(Calendar.MONTH);
-        int d = cal.get(Calendar.DAY_OF_MONTH);
-        int p_y = y-1;
-
-        String period = String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d",m, d, p_y, m,d, y);
         ArrayList<String> symbols = getSymbolList();
-
         for (String symbol : symbols) {
             for(String window : windows ){
                 File dir = new File(fileMap.get(window));
                 if(!dir.exists())
                     dir.mkdirs();
-
+                String period=periodMap.get(window);
                 String path = fileMap.get(window) + symbol + ".txt";
                 System.out.println(path);
                 String linkStr = String.format("http://chart.finance.yahoo.com/table.csv?s=%s&%s&g=%s&ignore=.csv",symbol, period, window);
