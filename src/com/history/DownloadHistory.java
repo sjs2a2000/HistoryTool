@@ -52,7 +52,8 @@ public class DownloadHistory {
 
     void DownloadSymbols() throws IOException {
         //make the directory to store data if it does not exist
-        File dir = new File("c:/prices/stocksdb"); //this throws error if it does not exist??
+        System.out.println("DownloadSymbols");
+;        File dir = new File("c:/prices/stocksdb"); //this throws error if it does not exist??
         System.out.println("test dir");
         if(dir.exists()) {
             System.out.println("dir exits for writing history");
@@ -89,6 +90,7 @@ public class DownloadHistory {
 
     void DownloadPrices() throws IOException
     {
+        System.out.println("DownloadPrices");
         ArrayList<String> symbols = getSymbolList();
         for (String symbol : symbols) {
             for(String window : windows ){
@@ -96,12 +98,19 @@ public class DownloadHistory {
                 if(!dir.exists())
                     dir.mkdirs();
                 String period=periodMap.get(window);
+                symbol=symbol.replace("\"","");
+                if(symbol.equals("Symbol"))
+                    continue;
                 String path = fileMap.get(window) + symbol + ".txt";
                 System.out.println(path);
                 String linkStr = String.format("http://chart.finance.yahoo.com/table.csv?s=%s&%s&g=%s&ignore=.csv",symbol, period, window);
                 System.out.println(linkStr);
                 URL link = new URL(linkStr);
-                FileUtils.copyURLToFile(link, new File(path));
+                try {
+                    FileUtils.copyURLToFile(link, new File(path));
+                }catch(Exception err){
+                    System.out.println(err.getMessage());
+                }
             }
         }
     }
