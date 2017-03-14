@@ -2,6 +2,7 @@
  * Created by sjs2a on 11/12/2016.
  */
 package com.history;
+import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -9,11 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-
-//TODO: how long does this run
-//      do i need symbols by exchange
-//      what about options
-//      public/private methods
 
 public class DownloadHistory {
     HashMap<String, String> fileMap = new HashMap<String, String>();
@@ -35,13 +31,37 @@ public class DownloadHistory {
         int m = cal.get(Calendar.MONTH);
         int d = cal.get(Calendar.DAY_OF_MONTH);
         periodMap.put("d", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-dPeriod, m, d, y));
+        System.out.println(String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-dPeriod, m, d, y));
         periodMap.put("w", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-wPeriod, m, d, y));
         periodMap.put("m", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y-mPeriod, m, d, y));
     }
 
+    /*
+    allows the modification of the period for the data via the commandline
+     */
     public static void main(String[] args) {
-        // write your code here
-        DownloadHistory dl = new DownloadHistory(10, 10, 15);
+        int dperiod=10, wperiod=10, mperiod=15;
+        CommandLineParser parser = new DefaultParser();
+        Options options = new Options();
+        options.addOption("d", "day", false, "period for day" );
+        options.addOption( "m", "month", false, "period for month" );
+        options.addOption( "y", "year", false, "period for year" );
+        try {
+            CommandLine line = parser.parse(options, args);
+            if (line.hasOption('d')){
+                dperiod = Integer.parseInt(line.getOptionValue("d"));
+            }
+            if (line.hasOption('w')){
+                wperiod = Integer.parseInt(line.getOptionValue("w"));
+            }
+            if (line.hasOption('m')){
+                mperiod = Integer.parseInt(line.getOptionValue("m"));
+            }
+        }
+        catch(ParseException exp){
+            System.out.println( "Unexpected exception:" + exp.getMessage() );
+        }
+        DownloadHistory dl = new DownloadHistory(dperiod, wperiod, mperiod);
         try {
             dl.DownloadSymbols();
             dl.DownloadPrices();
