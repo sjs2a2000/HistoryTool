@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="symbolsdownload:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/symbolsdownload_jar</output-path>
+    <root id="archive" name="symbolsdownload.jar">
+      <element id="module-output" name="symbolsdownload" />
+      <element id="library" level="project" name="opencsv-3.8" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-io-2.5/commons-io-2.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-io-2.5/commons-io-2.5-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-cli-1.4/commons-cli-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-cli-1.4/commons-cli-1.4-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-cli-1.4/commons-cli-1.4-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-cli-1.4/commons-cli-1.4-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-cli-1.4/commons-cli-1.4-test-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.ivy2/cache/commons-lang/commons-lang/jars/commons-lang-2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.ivy2/cache/commons-cli/commons-cli/jars/commons-cli-1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
