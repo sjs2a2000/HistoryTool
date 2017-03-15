@@ -1,6 +1,9 @@
 /**
  * Created by sjs2a on 11/12/2016.
  */
+
+//Author: Scott Sontag
+
 package com.history;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
