@@ -126,7 +126,7 @@ public class DownloadHistory {
                     continue;
                 String path = fileMap.get(window) + symbol + ".txt";
                 System.out.println(path);
-                String linkStr = String.format("http://chart.finance.yahoo.com/table.csv?s=%s&%s&g=%s&ignore=.csv",symbol, period, window);
+                String linkStr = String.format("https://chart.finance.yahoo.com/table.csv?s=%s&%s&g=%s&ignore=.csv",symbol, period, window);
                 System.out.println(linkStr);
                 URL link = new URL(linkStr);
                 try {
