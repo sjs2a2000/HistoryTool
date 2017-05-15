@@ -1,0 +1,59 @@
+LookUp,Name,File,Type
+^DJI,Dow Jones Industrial Average,I-DJIA,Index
+^DJT,Dow Jones Transportation Average,I-DJTA,Index
+^DJU,Dow Jones Utility Average,z,Index
+^DJA,Dow Jones Composite Average,I-DJCA,Index
+^IXIC,NASDAQ Composite Index,I-COMPQ,Index
+^NDX,NASDAQ 100 Index,I-NDX,Index
+^TV.O,NASDAQ Total Volume,I-VOLQ,Stat
+^XAU,PHLX Gold/Silver Index,XAU,Index
+^XAX,AMEX Composite Index,I-ACOMP,Index
+^IIX,AMEX Interactive Week Internet,IIX,Index
+^NWX,AMEX Networking Index,NWX,Index
+^XMI,Major Market Index,XMI,Index
+^SOX,PHLX Semiconductor Index,SOX,Index
+^RUT,Ruseell 2000 Index,RUT,Index
+^IRX,13-Week T-Bill Rate,IRX,Index
+^TNX,CBOE 10-Year T-note Interest Rate,TNX,Index
+^TYX,CBOE 30-Year T-Bond Interest Rate,TYX,Index
+^FVX,CBOE 5-Year T-Yield,FVX,Index
+^GSPC,S&P 500 Index,SPX,Index
+^OEX,S&P 100 Index,OEX,Index
+^MID,S&P 400 Mid-cap Index,MID,Index
+^SML,S&P 600 Small-cap Index,SML,Index
+^SPSUPX,S&P 1500 Supercomposite Index,SPSUPR,Index
+^TV.N,NYSE Total Volume,I-VOLN,Stat
+DX-Y.NYB,US Dollar Index,I-DXY,Index
+^BPX,British Pound,C-BP,Curr
+^SFC,Swiss Franc,C-SFC,Curr
+^YUK,Japanese Yen,C-YEN,Curr
+XLY,Select Sector SPDR - Consumer Discretionary,XLY,Stock
+XLP,Select Sector SPDR - Consumer Staples,XLP,Stock
+XLE,Select Sector SPDR - Energy,XLE,Stock
+XLF ,Select Sector SPDR - Financial,XLF,Stock
+XLV,Select Sector SPDR - Healthcare,XLV,Stock
+XLI,Select Sector SPDR - Industrial,XLI,Stock
+XLB,Select Sector SPDR - Materials,XLB,Stock
+XLK,Select Sector SPDR - Technology ,XLK,Stock
+XLU,Select Sector SPDR - Utilities,XLU,Stock
+XRT,SPDR - S&P Retail ,XRT,Stock
+XHB,SPDR - S&P Homebuilders,XHB,Stock
+IYT,iSHARES DJ Transportation Avg Fund,IYT,Stock
+SPY,SPDR S&P 500 ETF,SPY,Stock
+UNG,US Natural Gas Fund ETF,UNG,Stock
+GLD,SPDR Gold Trust,GLD,Stock
+SLV,iSHARES Silver Trust ETF,SLV,Stock
+ITB,iSHARES DJ US Home Construction ETF,ITB,Stock
+PICK,iSHARES MSCI Global Sel Metals & Mining ETF,PICK,Stock
+USCI,US Commodity Index Fund,USCI,Stock
+GDX,Gold ETF,GDX,Stock
+IAU,iSHARES COMEX Gold Trust ,IAU,Stock
+AMZA,FollowIntraCap MLP ETF,AMZA,Stock
+ITA,iSHARES DJ US Aerospace & Defense Index Fund,ITA,Stock
+TNX,CBOE 10-Year T-note Interest Rate,TNX,Stock
+TYX,CBOE 30-Year T-Bond Interest Rate,TYX,Stock
+FVX,CBOE 5-Year T-Yield,FVX,Stock
+IRX,CBOE Short-term Int Rate,IRX,Stock
+^VIX,CBOE S&P 500 Implied Vol Index,VIX,Index
+DXY-Y.NYB,US Dollar Index,DXY,Index
+COW,iPATH DJ UBS Livestock Total Return,COW,Stock
