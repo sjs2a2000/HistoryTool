@@ -12,12 +12,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DownloadHistory {
     HashMap<String, String> fileMap = new HashMap<String, String>();
@@ -33,25 +36,39 @@ public class DownloadHistory {
     }
 
     DownloadHistory(int dPeriod, int wPeriod, int mPeriod) {
-        java.util.Date date = new Date();
+        //period1=1493202557&period2=1495794557&interval=1d
+        java.util.Date date1 = new Date();
+        long start = date1.toInstant().getEpochSecond();
         Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        int y = cal.get(Calendar.YEAR);
-        int m = cal.get(Calendar.MONTH);
-        int d = cal.get(Calendar.DAY_OF_MONTH);
-        periodMap.put("d", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y - dPeriod, m, d, y));
-        System.out.println(String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y - dPeriod, m, d, y));
-        periodMap.put("w", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y - wPeriod, m, d, y));
-        periodMap.put("m", String.format("a=%d&b=%d&c=%d&d=%d&e=%d&f=%d", m, d, y - mPeriod, m, d, y));
+        cal.setTime(date1);
+        cal.add(Calendar.YEAR, -dPeriod);
+        long endDay = cal.getTime().toInstant().getEpochSecond();
+        cal = Calendar.getInstance();
+        cal.setTime(date1);
+        cal.add(Calendar.YEAR, -wPeriod);
+        long endWeek = cal.getTime().toInstant().getEpochSecond();
+        cal = Calendar.getInstance();
+        cal.setTime(date1);
+        cal.add(Calendar.YEAR, -mPeriod);
+        long endMonth = cal.getTime().toInstant().getEpochSecond();
+        //https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1493206674&period2=1495798674&interval=1d&events=history&crumb=NxFZ0nuSN/G
+        periodMap.put("d", String.format("period1=%d&period2=%d&interval=1d&events=history", endDay, start));
+        System.out.println(String.format(String.format("period1=%d&period2=%d&interval=1d&events=history", endDay, start)));
+        periodMap.put("w", String.format("period1=%d&period2=%d&interval=1wk&events=history", endWeek, start));
+        System.out.println(String.format(String.format("period1=%d&period2=%d&interval=1wk&events=history", endWeek, start)));
+        periodMap.put("m", String.format("period1=%d&period2=%d&interval=1mo&events=history", endMonth, start));
+        System.out.println(String.format(String.format("period1=%d&period2=%d&interval=1mo&events=history", endMonth, start)));
     }
 
     /*
     allows the modification of the period for the data via the commandline
      */
     public static void main(String[] args) {
+        //https://query1.finance.yahoo.com/v7/finance/download/A?period1=1493202557&period2=1495794557&interval=1d&events=history&crumb=NxFZ0nuSN/G
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date1 = new Date();
-        System.out.println(dateFormat.format(date1)); //2016/11/16 12:08:43
+        System.out.println(dateFormat.format(date1));
+        System.out.println(date1.toInstant().getEpochSecond());
 
         int dperiod = 10, wperiod = 10, mperiod = 15;
         CommandLineParser parser = new DefaultParser();
@@ -195,6 +212,12 @@ public class DownloadHistory {
 
     void DownloadSymbolPrice(String symbol, HashMap<String, String> mapping)
     {
+        //1wk, 1mo
+        //https://query1.finance.yahoo.com/v7/finance/download/AAL?period1=1494873000&period2=1494959400&interval=1d&events=history&crumb=l0aEtuOKocj
+        //https://query1.finance.yahoo.com/v7/finance/download/A?period1=1493202557&period2=1495794557&interval=1d&events=history&crumb=NxFZ0nuSN/G
+
+        //period1=timestamp(date)
+        String crumb = "NxFZ0nuSN/G";
         try {
             for (String window : windows) {
                 File dir = new File(fileMap.get(window));
@@ -214,7 +237,7 @@ public class DownloadHistory {
                     linkSym = linkSym.replaceFirst("\\.","-");
                     linkSym = linkSym.replaceFirst("\\.","");
                 }
-                String linkStr = String.format("https://chart.finance.yahoo.com/table.csv?s=%s&%s&g=%s&ignore=.csv", linkSym, period, window);
+                String linkStr = String.format("https://query1.finance.yahoo.com/v7/finance/download/%s?%s&crumb=%s", linkSym, period, crumb);
                 System.out.println("Symbol:"+symbol + " link: " + linkStr);
                 URL link = new URL(linkStr);
                 try {
