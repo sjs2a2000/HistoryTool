@@ -7,8 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7fe65c9-66b9-4620-8a4b-cb303c13ea38" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/symbolsdownload_jar/symbolsdownload.jar" afterPath="$PROJECT_DIR$/out/artifacts/symbolsdownload_jar/symbolsdownload.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/symbolsdownload_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/symbolsdownload_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_cli_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_cli_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ivy.xml" afterPath="$PROJECT_DIR$/ivy.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/history/DownloadHistory.java" afterPath="$PROJECT_DIR$/src/com/history/DownloadHistory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symbolsdownload.iml" afterPath="$PROJECT_DIR$/symbolsdownload.iml" />
     </list>
@@ -29,8 +31,8 @@
       <file leaf-file-name="DownloadHistory.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/history/DownloadHistory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="386" column="37" lean-forward="true" selection-start-line="386" selection-start-column="37" selection-end-line="386" selection-end-column="37" />
+            <state relative-caret-position="229">
+              <caret line="377" column="55" lean-forward="false" selection-start-line="377" selection-start-column="55" selection-end-line="377" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,12 +43,9 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5491">
-              <caret line="323" column="34" lean-forward="false" selection-start-line="323" selection-start-column="34" selection-end-line="323" selection-end-column="34" />
-              <folding>
-                <marker date="1495915526418" expanded="true" signature="71134:71151" ph="..." />
-                <marker date="1495915526418" expanded="true" signature="71134:71182" ph="..." />
-              </folding>
+            <state relative-caret-position="6205">
+              <caret line="365" column="34" lean-forward="false" selection-start-line="365" selection-start-column="34" selection-end-line="365" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -69,8 +68,10 @@
                 <element signature="e#7079#7080#0" expanded="false" />
                 <element signature="e#7284#7285#0" expanded="false" />
                 <element signature="e#7339#7340#0" expanded="false" />
-                <element signature="e#132445#132446#0" expanded="false" />
-                <element signature="e#132519#132520#0" expanded="false" />
+                <element signature="e#19452#19458#0" expanded="false" />
+                <element signature="e#22669#22675#0" expanded="false" />
+                <element signature="e#132372#132538#0" expanded="false" />
+                <element signature="e#132537#132538#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -126,6 +127,7 @@
       <find>path</find>
       <find>crumb</find>
       <find>values</find>
+      <find>downloadFile</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,7 +155,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="59" />
+    <option name="x" value="352" />
     <option name="width" value="2073" />
     <option name="height" value="985" />
   </component>
@@ -172,7 +174,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -187,6 +189,46 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="IvyIDEA" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HistoryDownloadTool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IvyIDEA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="httpclient-4.5.3.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="http" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HistoryDownloadTool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IvyIDEA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="httpclient-4.5.3.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -289,14 +331,14 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/commons-cli-1.4" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.ivy2/cache/commons-httpclient/commons-httpclient/jars/commons-httpclient-3.1.jar!/" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -743,15 +785,17 @@
       <workItem from="1494775653653" duration="15081000" />
       <workItem from="1495531723898" duration="2248000" />
       <workItem from="1495772866473" duration="24358000" />
+      <workItem from="1495941947900" duration="2593000" />
+      <workItem from="1495981975418" duration="6318000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94618000" />
+    <option name="totallyTimeSpent" value="103529000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="59" y="0" width="2073" height="985" extended-state="0" />
-    <editor active="false" />
+    <frame x="352" y="0" width="2073" height="985" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -762,21 +806,21 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31392694" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31392694" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13612056" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24598931" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2648402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2648402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -796,7 +840,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/history/DownloadHistory.java</url>
-          <line>377</line>
+          <line>415</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -808,18 +852,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/history/DownloadHistory.java</url>
-          <line>217</line>
+          <line>453</line>
           <properties />
-          <option name="timeStamp" value="39" />
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/history/DownloadHistory.java</url>
-          <line>389</line>
+          <line>457</line>
           <properties />
-          <option name="timeStamp" value="40" />
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/history/DownloadHistory.java</url>
+          <line>413</line>
+          <properties />
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="56" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -862,10 +912,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5134">
           <caret line="302" column="34" lean-forward="false" selection-start-line="302" selection-start-column="34" selection-end-line="302" selection-end-column="34" />
-          <folding>
-            <marker date="1495915526418" expanded="true" signature="71134:71151" ph="..." />
-            <marker date="1495915526418" expanded="true" signature="71134:71182" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -886,8 +933,10 @@
             <element signature="e#7079#7080#0" expanded="false" />
             <element signature="e#7284#7285#0" expanded="false" />
             <element signature="e#7339#7340#0" expanded="false" />
-            <element signature="e#132445#132446#0" expanded="false" />
-            <element signature="e#132519#132520#0" expanded="false" />
+            <element signature="e#19452#19458#0" expanded="false" />
+            <element signature="e#22669#22675#0" expanded="false" />
+            <element signature="e#132372#132538#0" expanded="false" />
+            <element signature="e#132537#132538#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -951,8 +1000,10 @@
             <element signature="e#7079#7080#0" expanded="false" />
             <element signature="e#7284#7285#0" expanded="false" />
             <element signature="e#7339#7340#0" expanded="false" />
-            <element signature="e#132445#132446#0" expanded="false" />
-            <element signature="e#132519#132520#0" expanded="false" />
+            <element signature="e#19452#19458#0" expanded="false" />
+            <element signature="e#22669#22675#0" expanded="false" />
+            <element signature="e#132372#132538#0" expanded="false" />
+            <element signature="e#132537#132538#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1016,8 +1067,10 @@
             <element signature="e#7079#7080#0" expanded="false" />
             <element signature="e#7284#7285#0" expanded="false" />
             <element signature="e#7339#7340#0" expanded="false" />
-            <element signature="e#132445#132446#0" expanded="false" />
-            <element signature="e#132519#132520#0" expanded="false" />
+            <element signature="e#19452#19458#0" expanded="false" />
+            <element signature="e#22669#22675#0" expanded="false" />
+            <element signature="e#132372#132538#0" expanded="false" />
+            <element signature="e#132537#132538#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1303,20 +1356,19 @@
             <element signature="e#7079#7080#0" expanded="false" />
             <element signature="e#7284#7285#0" expanded="false" />
             <element signature="e#7339#7340#0" expanded="false" />
-            <element signature="e#132445#132446#0" expanded="false" />
-            <element signature="e#132519#132520#0" expanded="false" />
+            <element signature="e#19452#19458#0" expanded="false" />
+            <element signature="e#22669#22675#0" expanded="false" />
+            <element signature="e#132372#132538#0" expanded="false" />
+            <element signature="e#132537#132538#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5491">
-          <caret line="323" column="34" lean-forward="false" selection-start-line="323" selection-start-column="34" selection-end-line="323" selection-end-column="34" />
-          <folding>
-            <marker date="1495915526418" expanded="true" signature="71134:71151" ph="..." />
-            <marker date="1495915526418" expanded="true" signature="71134:71182" ph="..." />
-          </folding>
+        <state relative-caret-position="6205">
+          <caret line="365" column="34" lean-forward="false" selection-start-line="365" selection-start-column="34" selection-end-line="365" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1330,8 +1382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/history/DownloadHistory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="386" column="37" lean-forward="true" selection-start-line="386" selection-start-column="37" selection-end-line="386" selection-end-column="37" />
+        <state relative-caret-position="229">
+          <caret line="377" column="55" lean-forward="false" selection-start-line="377" selection-start-column="55" selection-end-line="377" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1415,7 +1467,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>commons-cli-1</last-edited>
+          <last-edited>commons-httpclient-3.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -28,7 +28,7 @@ import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-
+import org.apache.commons.io.input.ReversedLinesFileReader;
 
 public class DownloadHistory {
     HashMap<String, String> fileMap = new HashMap<String, String>();
@@ -349,8 +349,21 @@ public class DownloadHistory {
         return cookieValue;
     }
 
+    void writeLines(InputStream in, FileOutputStream out) throws Exception
+    {
+        byte[] buffer = new byte[1024];
+        int len = in.read(buffer);
+        if (Thread.interrupted()) {
+            throw new InterruptedException();
+        }
+        if(len !=-1) {
+            writeLines(in, out);
+            out.write(buffer, 0, len);
+        }
+    }
+
     //be sure to delete file after working with it. filenamePrefix ~ "test_", file extension ~ ".jpg", include the "."
-    public File downloadFile(String url, String filenamePrefix, String fileExtension) throws Exception{
+    public File downloadFile(String url, String filenamePrefix, String fileExtension, String path) throws Exception{
         //request setup...
         URLConnection request = null;
         request = new URL(url).openConnection();
@@ -366,6 +379,9 @@ public class DownloadHistory {
         FileOutputStream out = new FileOutputStream(downloadedFile);
         byte[] buffer = new byte[1024];
         int len = in.read(buffer);
+        //if(len != -1)
+        //    out.write(buffer, 0, len);
+        int count=0;
         while (len != -1) {
             out.write(buffer, 0, len);
             len = in.read(buffer);
@@ -375,6 +391,28 @@ public class DownloadHistory {
         }
         in.close();
         out.close();
+
+        String strpath="/var/nagios.log";
+        ReversedLinesFileReader fr = new ReversedLinesFileReader(downloadedFile);
+        File output = new File(path);
+        PrintWriter printer = new PrintWriter(output);
+        printer.write("Date,Open,High,Low,Close,ADate,Open,High,Low,Close,Adj Close,Volume\n");
+        String ch;
+        String Conversion="";
+        int index =0;
+        try {
+            do {
+                ch = fr.readLine();
+                if(ch!=null && !ch.contains("Date"))
+                    printer.write(ch + "\n");
+                index++;
+            } while (ch != null);
+            printer.flush();
+        } catch(Exception err){
+            System.out.println(err.getMessage());
+        }
+        fr.close();
+
         return downloadedFile;
     }
     void DownloadSymbolPrice(String symbol, HashMap<String, String> mapping)
@@ -413,8 +451,8 @@ public class DownloadHistory {
 
                 //System.out.println("Cookies=" + cookie1 + " or " + cookie2);
                 try {
-                    File tempFile = downloadFile( linkStr, "TEST" + symbol, ".csv");
-                    FileUtils.copyFile(tempFile, new File(path));
+                    File tempFile = downloadFile( linkStr, "TEST" + symbol, ".csv", path);
+                    //FileUtils.copyFile(tempFile, new File(path));
                     //FileUtils.copyURLToFile(link, new File(path), 5000, 10000);
                 } catch (Exception err) {
                     System.out.println(err.getMessage());
