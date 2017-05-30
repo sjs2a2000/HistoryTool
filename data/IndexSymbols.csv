@@ -1,7 +1,7 @@
 LookUp,Name,File,Type
 ^DJI,Dow Jones Industrial Average,I-DJIA,Index
 ^DJT,Dow Jones Transportation Average,I-DJTA,Index
-^DJU,Dow Jones Utility Average,z,Index
+^DJU,Dow Jones Utility Average,I-DJUA,Index
 ^DJA,Dow Jones Composite Average,I-DJCA,Index
 ^IXIC,NASDAQ Composite Index,I-COMPQ,Index
 ^NDX,NASDAQ 100 Index,I-NDX,Index
@@ -57,3 +57,5 @@ IRX,CBOE Short-term Int Rate,IRX,Stock
 ^VIX,CBOE S&P 500 Implied Vol Index,VIX,Index
 DXY-Y.NYB,US Dollar Index,DXY,Index
 COW,iPATH DJ UBS Livestock Total Return,COW,Stock
+^SPGGSCI,S&P GSCI,GSCI,Index
+
