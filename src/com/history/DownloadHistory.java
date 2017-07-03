@@ -23,12 +23,15 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.net.*;
 import java.io.*;
+import java.util.regex.*;
 
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.io.input.ReversedLinesFileReader;
+
+
 
 public class DownloadHistory {
     HashMap<String, String> fileMap = new HashMap<String, String>();
@@ -71,6 +74,53 @@ public class DownloadHistory {
     /*
     allows the modification of the period for the data via the commandline
      */
+    Tuple<String, String> GetCookieAndCrumb() throws IOException
+    {
+        OutputStream out = null;
+        URLConnection conn = null;
+        InputStream in = null;
+        try{
+            URL url = new URL("https://finance.yahoo.com/quote/SPY");
+            URLConnection con = url.openConnection();
+            String cook = "";
+            for (Map.Entry<String, List<String>> entry : con.getHeaderFields().entrySet()) {
+                if (entry.getKey() == null
+                        || !entry.getKey().equals("Set-Cookie"))
+                    continue;
+                for (String s : entry.getValue()) {
+                    System.out.println(s);
+                    cook=s;
+                }
+            }
+            String crumb = null;
+            InputStream inStream = con.getInputStream();
+            InputStreamReader irdr = new InputStreamReader(inStream);
+            BufferedReader rsv = new BufferedReader(irdr);
+
+            Pattern crumbPattern = Pattern.compile(".*\"CrumbStore\":\\{\"crumb\":\"([^\"]+)\"\\}.*");
+
+            String line = null;
+            while (crumb == null && (line = rsv.readLine()) != null) {
+                Matcher matcher = crumbPattern.matcher(line);
+                if (matcher.matches())
+                    crumb = matcher.group(1);
+            }
+            rsv.close();
+            System.out.println(crumb); // Display the string.
+            // quoteUrl = "https://query1.finance.yahoo.com/v7/finance/download/IBM?period1=1493425217&period2=1496017217&interval=1d&events=history&crumb=" + crumb;
+            //url = new URL(quoteUrl);
+            //con = url.openConnection();
+            //con.setRequestProperty("Cookie", cook);
+            //con.connect();
+            Tuple<String, String> t = new Tuple<>(cook, crumb);
+            return t;
+        }catch(Exception err){
+            System.out.println(err.toString());
+            throw err;
+        }
+
+    }
+
     public static void main(String[] args) {
         //https://query1.finance.yahoo.com/v7/finance/download/A?period1=1493202557&period2=1495794557&interval=1d&events=history&crumb=NxFZ0nuSN/G
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -100,12 +150,12 @@ public class DownloadHistory {
         }
         DownloadHistory dl = new DownloadHistory(dperiod, wperiod, mperiod);
         try {
+            Tuple<String, String> t = dl.GetCookieAndCrumb();
             dl.DownloadSymbols();
-            dl.DownloadPrices();
+            dl.DownloadPrices(t.a, t.b);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         Date date2 = new Date();
         System.out.println(dateFormat.format(date2)); //2016/11/16 12:08:43
         long difference = (date2.getTime() - date1.getTime())/1000;
@@ -218,169 +268,17 @@ public class DownloadHistory {
         return temp;
     }
 
-    void getURL(){
-        URL u;
-        InputStream is = null;
-        DataInputStream dis;
-        String s;
-
-        try {
-
-            //------------------------------------------------------------//
-            // Step 2:  Create the URL.                                   //
-            //------------------------------------------------------------//
-            // Note: Put your real URL here, or better yet, read it as a  //
-            // command-line arg, or read it from a file.                  //
-            //------------------------------------------------------------//
-
-            u = new URL("https://finance.yahoo.com/quote/%5EGSPC/history?p=%5EGSPC");
-
-            //----------------------------------------------//
-            // Step 3:  Open an input stream from the url.  //
-            //----------------------------------------------//
-
-            is = u.openStream();         // throws an IOException
-
-            //-------------------------------------------------------------//
-            // Step 4:                                                     //
-            //-------------------------------------------------------------//
-            // Convert the InputStream to a buffered DataInputStream.      //
-            // Buffering the stream makes the reading faster; the          //
-            // readLine() method of the DataInputStream makes the reading  //
-            // easier.                                                     //
-            //-------------------------------------------------------------//
-
-            dis = new DataInputStream(new BufferedInputStream(is));
-
-            //------------------------------------------------------------//
-            // Step 5:                                                    //
-            //------------------------------------------------------------//
-            // Now just read each record of the input stream, and print   //
-            // it out.  Note that it's assumed that this problem is run   //
-            // from a command-line, not from an application or applet.    //
-            //------------------------------------------------------------//
-
-            while ((s = dis.readLine()) != null) {
-                System.out.println(s);
-            }
-
-        } catch (MalformedURLException mue) {
-
-            System.out.println("Ouch - a MalformedURLException happened.");
-            mue.printStackTrace();
-            System.exit(1);
-
-        } catch (IOException ioe) {
-
-            System.out.println("Oops- an IOException happened.");
-            ioe.printStackTrace();
-            System.exit(1);
-
-        } finally {
-
-            //---------------------------------//
-            // Step 6:  Close the InputStream  //
-            //---------------------------------//
-
-            try {
-                is.close();
-            } catch (IOException ioe) {
-                // just going to ignore this one
-            }
-
-        } // end of 'finally' clause
-    }
-
-    String getCookie()
-    {
-        HttpClient client = new HttpClient();client.getParams().setParameter("http.useragent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
-        GetMethod method = null;
-        Cookie cookie = null;
-        try{
-            URL url = new URL("https://finance.yahoo.com/quote/%5EGSPC/history?p=%5EGSPC");
-            method = new GetMethod(url.toURI().toString());
-            client.executeMethod(method);
-            Cookie[] cookies = client.getState().getCookies();
-            for (int i = 0; i < cookies.length; i++) {
-                cookie = cookies[i];
-                System.err.println(
-                        "Cookie: " + cookie.getName() +
-                                ", Value: " + cookie.getValue() +
-                                ", IsPersistent?: " + cookie.isPersistent() +
-                                ", Expiry Date: " + cookie.getExpiryDate() +
-                                ", Comment: " + cookie.getComment());
-
-                //cookie.setValue("My own value");
-            }
-            client.executeMethod(method);
-        } catch(Exception e) {
-            System.err.println(e);
-        } finally {
-            if (method!=null)
-                method.releaseConnection();
-        }
-
-        return cookie.getValue();
-    }
-
-    String retrieveCookie()
-    {
-        String cookieValue = null;
-        try {
-            URL url = new URL("https://finance.yahoo.com/quote/%5EGSPC/history?p=^GSPC");
-
-            URLConnection conn = url.openConnection();
-            conn.connect();
-            Map<String, List<String>> headers = conn.getHeaderFields();
-            List<String> values = headers.get("Set-Cookie");
-
-            for (Iterator iter = values.iterator(); iter.hasNext(); ) {
-                String v = (String)iter.next();
-
-                if (cookieValue == null)
-                    cookieValue = v;
-                else
-                    cookieValue = cookieValue + ";" + v;
-            }
-        }catch(Exception err) {
-            System.out.println(err.getMessage());
-        }
-
-        return cookieValue;
-    }
-
-    void writeLines(InputStream in, FileOutputStream out) throws Exception
-    {
-        byte[] buffer = new byte[1024];
-        int len = in.read(buffer);
-        if (Thread.interrupted()) {
-            throw new InterruptedException();
-        }
-        if(len !=-1) {
-            writeLines(in, out);
-            out.write(buffer, 0, len);
-        }
-    }
-
     //be sure to delete file after working with it. filenamePrefix ~ "test_", file extension ~ ".jpg", include the "."
-    public File downloadFile(String url, String filenamePrefix, String fileExtension, String path) throws Exception{
+    public File downloadFile(String url, String filenamePrefix, String fileExtension, String path, String cookie) throws Exception{
         //request setup...
         URLConnection request = null;
         request = new URL(url).openConnection();
-        //extract session cookie from Selenium and use with HTTP request calls in Java
-        //example below assumes server is running PHP hence we get PHP session ID
-        //assumes you have direct access to WebDriver here
-        request.setRequestProperty("Cookie", "yvapF=%7B%22vl%22%3A4%2C%22rvl%22%3A1%2C%22al%22%3A55.63799499999998%2C%22rcc%22%3A0%2C%22ac%22%3A1%7D; B=brgq61tchpok6&b=3&s=6r; PRF=t%3DAAPL%252BA%252BVLO; ucs=lnct=1495794396&pnid=&pnct=");
-        //add other headers as needed...
-        //make the request to download file to disk as temp file and return path to file
-        //can add a check for HTTP status code 200 if needed, but sample here skips, just check response output (file)
+        request.setRequestProperty("Cookie", cookie);
         InputStream in = request.getInputStream();
         File downloadedFile = File.createTempFile(filenamePrefix, fileExtension);
         FileOutputStream out = new FileOutputStream(downloadedFile);
         byte[] buffer = new byte[1024];
         int len = in.read(buffer);
-        //if(len != -1)
-        //    out.write(buffer, 0, len);
         int count=0;
         while (len != -1) {
             out.write(buffer, 0, len);
@@ -392,7 +290,6 @@ public class DownloadHistory {
         in.close();
         out.close();
 
-        String strpath="/var/nagios.log";
         ReversedLinesFileReader fr = new ReversedLinesFileReader(downloadedFile);
         File output = new File(path);
         PrintWriter printer = new PrintWriter(output);
@@ -415,14 +312,8 @@ public class DownloadHistory {
 
         return downloadedFile;
     }
-    void DownloadSymbolPrice(String symbol, HashMap<String, String> mapping)
+    void DownloadSymbolPrice(String symbol, HashMap<String, String> mapping, String cookie, String crumb)
     {
-        //1wk, 1mo
-        //https://query1.finance.yahoo.com/v7/finance/download/AAL?period1=1494873000&period2=1494959400&interval=1d&events=history&crumb=l0aEtuOKocj
-        //https://query1.finance.yahoo.com/v7/finance/download/A?period1=1493202557&period2=1495794557&interval=1d&events=history&crumb=NxFZ0nuSN/G
-        //https://finance.yahoo.com/quote/^GSPC/history?p=^GSPC -> extract cookie from http session request
-        //period1=timestamp(date)
-        String crumb = "NxFZ0nuSN/G";
         try {
             for (String window : windows) {
                 File dir = new File(fileMap.get(window));
@@ -445,15 +336,8 @@ public class DownloadHistory {
                 String linkStr = String.format("https://query1.finance.yahoo.com/v7/finance/download/%s?%s&crumb=%s", linkSym, period, crumb);
                 System.out.println("Symbol:"+symbol + " link: " + linkStr);
                 URL link = new URL(linkStr);
-                //getURL();
-                //String cookie1 = getCookie();
-                //String cookie2 = retrieveCookie();
-
-                //System.out.println("Cookies=" + cookie1 + " or " + cookie2);
                 try {
-                    File tempFile = downloadFile( linkStr, "TEST" + symbol, ".csv", path);
-                    //FileUtils.copyFile(tempFile, new File(path));
-                    //FileUtils.copyURLToFile(link, new File(path), 5000, 10000);
+                    File tempFile = downloadFile( linkStr, "TEST" + symbol, ".csv", path, cookie);
                 } catch (Exception err) {
                     System.out.println(err.getMessage());
                 }
@@ -463,7 +347,7 @@ public class DownloadHistory {
         }
     }
 
-    void DownloadPrices()
+    void DownloadPrices(String cookie, String crumb)
     {
         //load the index file and create mapping of symbol to file
         HashMap<String,String> mapping = new HashMap<String, String>();
@@ -489,7 +373,7 @@ public class DownloadHistory {
                 //executor.execute(() -> {
                 //    DownloadSymbolPrice(symbol);
                 //});
-                DownloadSymbolPrice(symbol, mapping);
+                DownloadSymbolPrice(symbol, mapping, cookie, crumb);
                 ++index;
                 System.out.println("symbol:" + symbol + " done, symbol count:" + symbols.size() + " number complete:" + index);
             }
