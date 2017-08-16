@@ -9,7 +9,7 @@ To run:
  ~/HistoryDownloadTool/out/artifacts/symbolsdownload_jar (master)
 $ java -jar symbolsdownload.jar
 
-
+ 
 
 
 
