@@ -28,18 +28,18 @@
         <jarDirectory url="file://$USER_HOME$/Downloads/httpcomponents-client-4.5.2-bin/httpcomponents-client-4.5.2/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="opencsv-3.8" level="project" />
+    <orderEntry type="library" name="jars" level="project" />
     <orderEntry type="module-library">
       <library name="IvyIDEA">
         <CLASSES>
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-lang/commons-lang/jars/commons-lang-2.0.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-cli/commons-cli/jars/commons-cli-1.4.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-io/commons-io/jars/commons-io-2.5.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/commons-httpclient/commons-httpclient/jars/commons-httpclient-3.1.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/org.apache.httpcomponents/httpclient/jars/httpclient-4.5.3.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/org.apache.httpcomponents/httpcore/jars/httpcore-4.4.6.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-logging/commons-logging/jars/commons-logging-1.2.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-codec/commons-codec/jars/commons-codec-1.9.jar!/" />
-          <root url="jar://$USER_HOME$/.ivy2/cache/commons-httpclient/commons-httpclient/jars/commons-httpclient-3.1.jar!/" />
         </CLASSES>
         <JAVADOC>
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-lang/commons-lang/javadocs/commons-lang-2.0-javadoc.jar!/" />
@@ -54,17 +54,13 @@
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-lang/commons-lang/sources/commons-lang-2.0-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-cli/commons-cli/sources/commons-cli-1.4-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-io/commons-io/sources/commons-io-2.5-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/commons-httpclient/commons-httpclient/sources/commons-httpclient-3.1-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/org.apache.httpcomponents/httpclient/sources/httpclient-4.5.3-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/org.apache.httpcomponents/httpcore/sources/httpcore-4.4.6-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-logging/commons-logging/sources/commons-logging-1.2-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/commons-codec/commons-codec/sources/commons-codec-1.9-sources.jar!/" />
-          <root url="jar://$USER_HOME$/.ivy2/cache/commons-httpclient/commons-httpclient/sources/commons-httpclient-3.1-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="library" name="commons-io-2" level="project" />
-    <orderEntry type="library" name="commons-cli-1" level="project" />
-    <orderEntry type="library" name="jars" level="project" />
-    <orderEntry type="library" name="commons-httpclient-3.1" level="project" />
   </component>
 </module>

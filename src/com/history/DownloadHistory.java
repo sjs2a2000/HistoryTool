@@ -6,6 +6,7 @@
 
 package com.history;
 import org.apache.commons.cli.*;
+
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -25,21 +26,23 @@ import java.net.*;
 import java.io.*;
 import java.util.regex.*;
 
-import org.apache.commons.httpclient.Cookie;
+/*import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.GetMethod;*/
 import org.apache.commons.io.input.ReversedLinesFileReader;
 
 
 
+@SuppressWarnings("deprecation")
 public class DownloadHistory {
     HashMap<String, String> fileMap = new HashMap<String, String>();
     HashMap<String, String> periodMap = new HashMap<>();
     String[] windows = new String[]{"d", "w", "m"};
     String[] exchanges = new String[]{"nyse", "amex", "nasdaq"};
     String[] othersources = new String[]{"nasdaqlisted.txt", "otherlisted.txt", "IndexSymbols.csv"};
-
+    String _expectedDt="";
+    ArrayList<String> downloadFailed = new ArrayList<>();
     {
         fileMap.put("d", "c:/prices/daily/");
         fileMap.put("w", "c:/prices/weekly/");
@@ -49,9 +52,16 @@ public class DownloadHistory {
     DownloadHistory(int dPeriod, int wPeriod, int mPeriod) {
         //period1=1493202557&period2=1495794557&interval=1d
         java.util.Date date1 = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         long start = date1.toInstant().getEpochSecond();
         Calendar cal = Calendar.getInstance();
         cal.setTime(date1);
+        cal.add(Calendar.DAY_OF_WEEK, -1);
+        if(cal.getTime().getDay()==0)
+            cal.add(Calendar.DAY_OF_WEEK, -2);
+        else if(cal.getTime().getDay()==6)
+            cal.add(Calendar.DAY_OF_WEEK, -1);
+        _expectedDt= df.format(cal.getTime());
         cal.add(Calendar.YEAR, -dPeriod);
         long endDay = cal.getTime().toInstant().getEpochSecond();
         cal = Calendar.getInstance();
@@ -80,12 +90,14 @@ public class DownloadHistory {
         URLConnection conn = null;
         InputStream in = null;
         try{
-            URL url = new URL("https://finance.yahoo.com/quote/SPY");
+            URL url = new URL("https://finance.yahoo.com/quote/SPY?p=SPY");
             URLConnection con = url.openConnection();
+            //con.setConnectTimeout(5000); //milliseconds
             String cook = "";
-            for (Map.Entry<String, List<String>> entry : con.getHeaderFields().entrySet()) {
+            Map<String, List<String>> headerFields = con.getHeaderFields();
+            for (Map.Entry<String, List<String>> entry : headerFields.entrySet()) {
                 if (entry.getKey() == null
-                        || !entry.getKey().equals("Set-Cookie"))
+                        || !entry.getKey().toLowerCase().equals("set-cookie"))
                     continue;
                 for (String s : entry.getValue()) {
                     System.out.println(s);
@@ -112,8 +124,7 @@ public class DownloadHistory {
             //con = url.openConnection();
             //con.setRequestProperty("Cookie", cook);
             //con.connect();
-            Tuple<String, String> t = new Tuple<>(cook, crumb);
-            return t;
+            return new Tuple<>(cook, crumb);
         }catch(Exception err){
             System.out.println(err.toString());
             throw err;
@@ -160,6 +171,8 @@ public class DownloadHistory {
         System.out.println(dateFormat.format(date2)); //2016/11/16 12:08:43
         long difference = (date2.getTime() - date1.getTime())/1000;
         System.out.println("process ran in " + difference + " seconds");
+        System.out.println("Date errors for the following symbols expecteddate=" + dl._expectedDt);
+        dl.downloadFailed.forEach(System.out::println);
     }
     void DownloadSymbolFile(String exch)
     {
@@ -269,7 +282,7 @@ public class DownloadHistory {
     }
 
     //be sure to delete file after working with it. filenamePrefix ~ "test_", file extension ~ ".jpg", include the "."
-    public File downloadFile(String url, String filenamePrefix, String fileExtension, String path, String cookie) throws Exception{
+    public File downloadFile(String url, String filenamePrefix, String fileExtension, String path, String cookie, String dtexpected) throws Exception{
         //request setup...
         URLConnection request = null;
         request = new URL(url).openConnection();
@@ -289,27 +302,36 @@ public class DownloadHistory {
         }
         in.close();
         out.close();
-
-        ReversedLinesFileReader fr = new ReversedLinesFileReader(downloadedFile);
+        @SuppressWarnings("depreciation")
+        ReversedLinesFileReader fr; //noinspection deprecation
+        //noinspection deprecation
+        fr = new ReversedLinesFileReader(downloadedFile);
         File output = new File(path);
         PrintWriter printer = new PrintWriter(output);
         printer.write("Date,Open,High,Low,Close,ADate,Open,High,Low,Close,Adj Close,Volume\n");
         String ch;
         String Conversion="";
         int index =0;
+        boolean first = true;
         try {
             do {
                 ch = fr.readLine();
-                if(ch!=null && !ch.contains("Date"))
+                if(ch!=null && !ch.contains("Date")) {
                     printer.write(ch + "\n");
+                    if(first) {
+                        String dt = ch.split(",")[0];
+                        if(!dt.equals(dtexpected)) throw new Exception("expected date: " + dtexpected + " not available, date available: " + dt );
+                        first=false;
+                    }
+                }
                 index++;
             } while (ch != null);
             printer.flush();
         } catch(Exception err){
             System.out.println(err.getMessage());
+            downloadFailed.add(url);
         }
         fr.close();
-
         return downloadedFile;
     }
     void DownloadSymbolPrice(String symbol, HashMap<String, String> mapping, String cookie, String crumb)
@@ -337,7 +359,7 @@ public class DownloadHistory {
                 System.out.println("Symbol:"+symbol + " link: " + linkStr);
                 URL link = new URL(linkStr);
                 try {
-                    File tempFile = downloadFile( linkStr, "TEST" + symbol, ".csv", path, cookie);
+                    File tempFile = downloadFile( linkStr, "TEST" + symbol, ".csv", path, cookie, _expectedDt);
                 } catch (Exception err) {
                     System.out.println(err.getMessage());
                 }
